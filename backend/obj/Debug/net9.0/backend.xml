@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>backend</name>
+    </assembly>
+    <members>
+        <member name="M:UsuarioController.CadastraUsuario(CadastroUsuarioDTO)">
+            <summary>
+            Cadastra um usuário 
+            </summary>
+            <param >Objeto com os campos necessários para criação de um usuário</param>
+            <returns>IActionResult</returns>
+            <response code="200">Caso a criaçao seja feita com sucesso</response>
+        </member>
+    </members>
+</doc>
