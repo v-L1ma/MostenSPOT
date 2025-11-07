@@ -145,3 +145,4 @@ backend/obj/Debug/net9.0/staticwebassets.build.json
 backend/obj/Debug/net9.0/staticwebassets.build.json.cache
 backend/obj/Debug/net9.0/ref/backend.dll
 backend/obj/Debug/net9.0/refint/backend.dll
+backend/appsettings.json

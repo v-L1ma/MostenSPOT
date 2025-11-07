@@ -1,3 +1,5 @@
+using backend.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
@@ -42,13 +44,15 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
-                      policy  =>
+                      policy =>
                       {
                           policy.WithOrigins("http://localhost:4200")
                           .AllowAnyMethod()
                           .AllowAnyHeader();
                       });
 });
+
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
 builder.Services.AddControllers();
 
@@ -59,13 +63,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(ConnectionString);
 });
 
-// builder.Services
-//         .AddIdentity<Usuario, IdentityRole>(options =>
-//         {
-//             options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' ";
-//         })
-//         .AddEntityFrameworkStores<AppDbContext>()
-//         .AddDefaultTokenProviders();
+builder.Services
+        .AddIdentity<Usuario, IdentityRole>()
+        .AddEntityFrameworkStores<AppDbContext>()
+        .AddDefaultTokenProviders();
 
 var app = builder.Build();
 
