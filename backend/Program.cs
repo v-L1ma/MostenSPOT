@@ -1,8 +1,13 @@
+using System.Text;
 using backend.Application.Services;
+using backend.Application.Services.Reserva;
 using backend.Application.Services.Token;
 using backend.Domain.Entities;
+using backend.src.Infraestructure.Data.Repositories.Reserva;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -49,6 +54,8 @@ builder.Services
 
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IReservaRepository, ReservaRepository>();
+builder.Services.AddScoped<IReservaService, ReservaService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddCors(options =>
@@ -64,7 +71,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddControllers();
 
-var ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var ConnectionString = builder.Configuration["DefaultConnection"];
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
